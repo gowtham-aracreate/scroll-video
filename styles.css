@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.div1 {
+    height: 100vh;
+    background-color: pink;
+}
+
+.div2 {
+    height: 100vh;
+    background-color: white;
+}
+
+.square {
+    width: 150px;
+    height: 20vh;
+    background-color: red;
+
+}
+
+.square2 {
+    width: 150px;
+    height: 20vh;
+    background-color: blue;
+}
+
+/* scrolltrigger */
+
+.box {
+    width: 150px;
+    height: 150px;
+    background-color: blue;
+}
+
+.panel {
+    height: 100vh;
+    background-color: pink;
+}
