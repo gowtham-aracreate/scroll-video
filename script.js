@@ -49,24 +49,32 @@ gsap.to(".scroller", {
 document.addEventListener("DOMContentLoaded", () => {
     const video = document.querySelector(".bgvideo");
 
-    // Create a GSAP timeline for video scrub
-    const tl = gsap.timeline({
-        scrollTrigger: {
-            trigger: ".scroller",
-            start: "top 0%",
-            scrub: 2,
-            pin: ".scroller",
-            pinSpacing: false
-        }
+  // Ensure video metadata is loaded
+    video.addEventListener("loadedmetadata", () => {
+        // Create a GSAP timeline for video scrub
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".scroller",
+                start: "top 0%",
+                scrub: 2,
+                pin: ".scroller",
+                pinSpacing: false
+            }
+        });
+
+        // Animate video time based on scroll position
+        tl.to({}, { // Empty object to define timeline
+            duration: video.duration,
+            ease: "power1.inOut", // Easing for smooth scrub effect
+            onUpdate: () => {
+                // Ensure the video is updated smoothly
+                video.currentTime = tl.progress() * video.duration;
+            }
+        });
     });
 
-    // Animate video time based on scroll position
-    tl.to(video, {
-        currentTime: video.duration,
-        ease: "power1.inOut", // No easing for scrub effect
-        onUpdate: () => {
-            // Ensure the video is updated smoothly
-            video.currentTime = tl.progress() * video.duration;
-        }
+    // Optional: Handle video errors
+    video.addEventListener("error", (e) => {
+        console.error("Error loading video:", e);
     });
 });
