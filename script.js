@@ -47,61 +47,55 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 // document.addEventListener("DOMContentLoaded", () => {
-    const video = document.querySelector(".bgvideo");
+const video = document.querySelector(".bgvideo");
 
-  // Ensure video metadata is loaded
-    video.addEventListener("loadedmetadata", () => {
-        // Create a GSAP timeline for video scrub
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".scroller",
-                start: "top 0%",
-                scrub: 2,
-                pin: ".scroller",
-                pinSpacing: false
-            }
-        });
-
-        // Animate video time based on scroll position
-        tl.to({}, { // Empty object to define timeline
-            duration: video.duration,
-            ease: "power1.inOut", // Easing for smooth scrub effect
-            onUpdate: () => {
-                // Ensure the video is updated smoothly
-                video.currentTime = tl.progress() * video.duration;
-            }
-        });
+// Ensure video metadata is loaded
+video.addEventListener("loadedmetadata", () => {
+    console.log("Video metadata loaded");
+    // Create a GSAP timeline for video scrub
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".scroller",
+            start: "top 0%",
+            scrub: 2,
+            pin: ".scroller",
+            pinSpacing: false
+        }
     });
 
-    // Optional: Handle video errors
-    video.addEventListener("error", (e) => {
-        console.error("Error loading video:", e);
+    // Animate video time based on scroll position
+    tl.to({}, { // Empty object to define timeline
+        duration: video.duration,
+        ease: "power1.inOut", // Easing for smooth scrub effect
+        onUpdate: () => {
+            // Ensure the video is updated smoothly
+            video.currentTime = tl.progress() * video.duration;
+        }
     });
+});
+
+// Optional: Handle video errors
+video.addEventListener("error", (e) => {
+    console.error("Error loading video:", e);
+});
 // });
 
- const video = document.querySelector(".bgvideo");
+const tl = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".scroller",
+        start: "top 0%",
+        scrub: 2,
+        pin: ".scroller",
+        pinSpacing: false
+    }
+});
 
-  // Ensure video metadata is loaded
-    video.addEventListener("loadedmetadata", () => {
-        // Create a GSAP timeline for video scrub
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".scroller",
-                start: "top 0%",
-                scrub: 2,
-                pin: ".scroller",
-                pinSpacing: false
-            }
-        });
-
-        // Animate video time based on scroll position
-        tl.to({}, { // Empty object to define timeline
-            duration: video.duration,
-            ease: "power1.inOut", // Easing for smooth scrub effect
-            onUpdate: () => {
-                // Ensure the video is updated smoothly
-                video.currentTime = tl.progress() * video.duration;
-            }
-        });
-    });
-
+// Animate video time based on scroll position
+tl.to({}, { // Empty object to define timeline
+    duration: video.duration,
+    ease: "power1.inOut", // Easing for smooth scrub effect
+    onUpdate: () => {
+        // Ensure the video is updated smoothly
+        video.currentTime = tl.progress() * video.duration;
+    }
+});
